@@ -1,5 +1,6 @@
 package tipolt.andre.workshopmongo.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,14 @@ public class PostService {
 	public void deleteById(String id) {
 		findById(id); // É pra se nao ter, ele ja retorna aquele erro
 		postRepository.deleteById(id);
+	}
+	
+	public List<Post> findByTitle(String text){
+		return postRepository.searchTitle(text);
+	}
+	public List<Post> fullSearch(String text, Date dateMin, Date dateMax){
+		dateMax = new Date(dateMax.getTime() + (1000 * 60 * 60 * 24));
+		return postRepository.fullSearch(text, dateMin, dateMax);
 	}
 	
 }
