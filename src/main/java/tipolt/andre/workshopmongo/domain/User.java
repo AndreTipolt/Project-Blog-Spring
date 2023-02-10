@@ -1,8 +1,11 @@
 package tipolt.andre.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.persistence.Id;
@@ -17,6 +20,9 @@ public class User implements Serializable{
 	private String id;
 	private String name;
 	private String email;
+	
+	@DBRef(lazy=true) // Serve pra referenciar/ligar as "entidades" e o lazy serve so pra vir os dados basicos em uma consulta, pra nao sobrecarregar o sistema
+	private List<Post> posts = new ArrayList<>();
 	
 	public User() {
 		
@@ -52,6 +58,11 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public List<Post> getPosts() {
+		return posts;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
