@@ -1,7 +1,6 @@
 package tipolt.andre.workshopmongo.userdto;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 import tipolt.andre.workshopmongo.domain.User;
 
